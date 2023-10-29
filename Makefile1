@@ -1,0 +1,12 @@
+binary:main.o test_lib.a
+	g++ -o binary main.o -L. -l:test_lib.a
+main.o:main.cpp
+	g++ -c main.cpp
+test_lib.a: car.o Database.o
+	ar cr test_lib.a car.o Database.o
+car.o: car.cpp
+	g++ -c car.cpp
+Database.o: Database.cpp
+	g++ -c Database.cpp
+clean:
+	rm -f *.o *.a binary

@@ -1,0 +1,12 @@
+binary: main.o test_lib.so
+	g++ -o binary main.o -L. -l:test_lib.so -Wl,-rpath -Wl,.
+main.o: main.cpp
+	g++ -c main.cpp
+test_lib.so: car.o Database.o
+	g++ -shared -o test_lib.so car.o Database.o
+car.o: car.cpp
+	g++ -c -fPIC car.cpp
+Database.o: Database.cpp
+	g++ -c -fPIC Database.cpp
+clean:
+	rm -f *.o *.so binary
